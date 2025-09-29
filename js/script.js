@@ -1,9 +1,76 @@
-/**
- * WEBSITE: https://themefisher.com
- * TWITTER: https://twitter.com/themefisher
- * FACEBOOK: https://www.facebook.com/themefisher
- * GITHUB: https://github.com/themefisher/
- */
+// ------------------------
+// PROMO SECTION
+// ------------------------
+async function loadPromo() {
+  try {
+    const res = await fetch('https://script.google.com/macros/s/https://script.google.com/macros/s/AKfycbwxSVq_9jMG-QeeFoAy6kxtU7R8ArsIvN6-wn4Kp3dLEeBiMBbn9btbeLNX2gQfqjWHwA/exec?type=promo');
+    const data = await res.json();
+    if (data.posterUrl) {
+      document.getElementById('promo-image').src = data.posterUrl;
+      document.getElementById('promo-image').style.display = 'block';
+    }
+  } catch (err) {
+    console.error('Error loading promo:', err);
+  }
+}
+
+window.addEventListener('DOMContentLoaded', loadPromo);
+
+// ------------------------
+// CLASSES SECTION: Get class info
+// ------------------------
+// Fetch classes from Apps Script web app
+async function loadClassesDebug() {
+  try {
+    const response = await fetch('https://script.google.com/macros/s/AKfycbxN7WvHNqEx9qmCpDUW4g3hFvC9LrPvnKzD2F9FUDRSojwUfvQkly28YvssMNAVqD2e/exec?type=classes');
+    const data = await response.json();
+
+    const container = document.getElementById('classes-debug');
+    container.innerHTML = ''; // clear previous content
+
+    data.forEach(cls => {
+      // Create card wrapper
+      const card = document.createElement('div');
+      card.className = 'card hover-card';
+      card.style.width = '220px'; // optional: fixed width
+
+      // Card content
+      const content = document.createElement('div');
+      content.className = 'card-content';
+
+      // Title
+      const title = document.createElement('h3');
+      title.className = 'card-title';
+      title.textContent = cls['Class Name'] || 'No Name';
+
+      // Description
+      const desc = document.createElement('p');
+      desc.className = 'card-description';
+      desc.textContent = cls.Description || 'No description';
+
+      // Price & Duration
+      const price = document.createElement('p');
+      price.textContent = 'Price: ' + (cls.Price || 'N/A');
+
+      const duration = document.createElement('p');
+      duration.textContent = 'Duration: ' + (cls.Duration || 'N/A');
+
+      // Append elements
+      content.appendChild(title);
+      content.appendChild(desc);
+      content.appendChild(price);
+      content.appendChild(duration);
+
+      card.appendChild(content);
+      container.appendChild(card);
+    });
+  } catch (err) {
+    console.error(err);
+    document.getElementById('classes-debug').textContent = 'Error fetching data: ' + err;
+  }
+}
+
+window.addEventListener('DOMContentLoaded', loadClassesDebug);
 
 // ------------------------
 // SCHEDULE SECTION: Classes Calendar
@@ -14,26 +81,27 @@ document.addEventListener('DOMContentLoaded', function() {
   const GOOGLE_API_KEY = 'AIzaSyBW1eCat6SicXhpcnbW2uv9jIiGinrltBA';
   const GOOGLE_CALENDAR_ID = '49238ffdbb6c83d48350881da0f598e0278f4e3637b70b2ba3ef55ea8cde68bf@group.calendar.google.com'; // e.g. yourname@gmail.com or xxxxx@group.calendar.google.com
 
-  const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbyv_Qxw8Z-lsQb3aVPAeQLVqCjr4wJpEOc1K6IE5bdtPHVK7KIv5WhGrIyBVmsqQb0G/exec';
+  const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbxN7WvHNqEx9qmCpDUW4g3hFvC9LrPvnKzD2F9FUDRSojwUfvQkly28YvssMNAVqD2e/exec';
 
   const calendarEl = document.getElementById('calendar');
 
   const calendar = new FullCalendar.Calendar(calendarEl, {
-    initialView: 'timeGridWeek',
-    googleCalendarApiKey: GOOGLE_API_KEY,
-    events: { googleCalendarId: GOOGLE_CALENDAR_ID },
+	initialView: 'timeGridWeek',
+	headerToolbar: {
+		left: 'prev,next today',
+		center: 'title',
+		right: 'dayGridMonth,timeGridWeek' // Month and Week views
+	},
+	googleCalendarApiKey: GOOGLE_API_KEY,
+	events: { googleCalendarId: GOOGLE_CALENDAR_ID },
 
-    eventClick: function(info) {
-      info.jsEvent.preventDefault();
-
-      // Fill modal fields
-      document.getElementById('eventTitle').value = info.event.title || '';
-      document.getElementById('eventDateTime').value =
-        info.event.start ? info.event.start.toLocaleString() : '';
-
-      // Show modal
-      document.getElementById('formModal').classList.add('is-active');
-    }
+	eventClick: function(info) {
+		info.jsEvent.preventDefault();
+		document.getElementById('eventTitle').value = info.event.title || '';
+		document.getElementById('eventDateTime').value =
+		info.event.start ? info.event.start.toLocaleString() : '';
+		document.getElementById('formModal').classList.add('is-active');
+	}
   });
 
   calendar.render();
@@ -70,8 +138,69 @@ document.addEventListener('DOMContentLoaded', function() {
   document.getElementById('modalBg').addEventListener('click', closeModal);
 });
 
+// ------------------------
+// REVIEWS SECTION
+// ------------------------
+async function loadReviews() {
+  const slider = document.getElementById('testimonial-slider');
+  slider.innerHTML = 'Loading reviews...';
 
+  try {
+    const response = await fetch('https://script.google.com/macros/s/AKfycbwMyu8FkaYSo1te7BNCKSG4NEbEbyabIninBLqgn0hmv6SzIhS2UV7LdbIFqwhzxEA-_A/exec?type=reviews'); 
+    const reviews = await response.json();
 
+    if (!reviews.length) {
+      slider.innerHTML = 'No reviews found.';
+      return;
+    }
+
+    slider.innerHTML = ''; // clear loading
+
+    reviews.forEach(r => {
+      const div = document.createElement('div');
+      div.classList.add('testimonial-content', 'has-text-centered');
+      
+      // Convert rating number to stars
+      let stars = '⭐'.repeat(Math.round(r.Rating || 0));
+
+      div.innerHTML = `
+        <i class="ti-quote-right has-text-white icon mb-20 is-inline-block"></i>
+        <p class="has-text-white mb-20">${r.Review}</p>
+        <img class="image is-rounded is-inline-block mb-20" src="${r.Image || 'images/testimonial/client-1.png'}" alt="client-image">
+        <h4 class="has-text-white">${r.Name}</h4>
+        <h6 class="has-text-light mb-20">${stars}</h6>
+      `;
+      slider.appendChild(div);
+    });
+
+    // Reinitialize Slick Slider after adding slides
+    if ($(slider).hasClass('slick-initialized')) {
+      $(slider).slick('unslick'); // remove previous instance
+    }
+
+    $('.testimonial-slider').slick({
+      dots: true,
+      infinite: true,
+      speed: 500,
+      slidesToShow: 1,
+      arrows: false,
+      adaptiveHeight: true,
+      autoplay: true,
+      autoplaySpeed: 5000, // auto swipe every 5 seconds
+      fade: true
+    });
+
+  } catch (err) {
+    console.error(err);
+    slider.innerHTML = 'Error loading reviews';
+  }
+}
+
+window.addEventListener('DOMContentLoaded', loadReviews);
+
+// ------------------------
+// OTHER FUNCTIONS
+// ------------------------
 (function ($) {
 	'use strict';
 
@@ -239,6 +368,3 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 })(jQuery);
-
-
-
