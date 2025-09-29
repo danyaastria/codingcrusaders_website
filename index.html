@@ -1,17 +1,15 @@
 <!DOCTYPE html>
 
 <!--
- // WEBSITE: https://themefisher.com
- // TWITTER: https://twitter.com/themefisher
- // FACEBOOK: https://www.facebook.com/themefisher
- // GITHUB: https://github.com/themefisher/
+PROJECT:	Coding Crusaders
+VERSION:	Version Number
 -->
 
 <html lang="zxx">
 
 <head>
   <meta charset="utf-8">
-  <title>Kross | Portfolio Template</title>
+  <title>Coding Crusaders</title>
 
   <!-- mobile responsive meta -->
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -45,17 +43,18 @@
 <header>
   <nav class="navbar is-dark is-fixed-top" role="navigation" aria-label="main navigation">
     <div class="navbar-brand">
-      <a class="navbar-item" href="index.html">
-        <img src="images/logo.png" width="112" height="28">
+      <a class="navbar-item logo-container" href="index.html">
+        <img src="images/logo.png" class="navbar-logo" alt="Logo">
+        <div class="promo-space"></div>
       </a>
-  
+
       <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navigation">
         <span aria-hidden="true"></span>
         <span aria-hidden="true"></span>
         <span aria-hidden="true"></span>
       </a>
     </div>
-  
+
     <div id="navigation" class="navbar-menu">
       <div class="navbar-end">
         <a href="#home" class="navbar-item">Home</a>
@@ -71,9 +70,12 @@
 <!-- hero area -->
 <section id="home" class="hero-area has-background-primary" id="parallax">
   <div class="container">
-    <div class="columns">
-      <div class="column is-11-desktop is-offset-1-desktop">
-        <h1 class="has-text-white font-tertiary">Coding <br> Crusaders </h1>
+    <div class="columns is-vcentered">
+      <div class="column is-8-desktop">
+        <h1 class="has-text-white font-tertiary">Making <br> Coding <br>Fun! </h1>
+      </div>
+      <div class="column is-4-desktop">
+        <img id="promo-image" style="display:none; max-width:100%;" alt="Promo">
       </div>
     </div>
   </div>
@@ -104,20 +106,11 @@
   <div class="layer" id="l9">
     <img src="images/illustrations/leaf-cyan-2.png" alt="bg-shape">
   </div>
-  <!-- social icon -->
-  <div class="list list-hero-social">
-    <a class="list-item has-text-white" href="#"><i class="ti-facebook"></i></a>
-    <a class="list-item has-text-white" href="#"><i class="ti-instagram"></i></a>
-    <a class="list-item has-text-white" href="#"><i class="ti-dribbble"></i></a>
-    <a class="list-item has-text-white" href="#"><i class="ti-twitter"></i></a>
-  </div>
-  <!-- /social icon -->
 </section>
 <!-- /hero area -->
 
-<!-- qualifications -->
+<!-- qualifications pending when we get features and what not
 <section class="section is-relative">
-  <!-- bg image -->
   <img class="image edu-bg-image" src="images/backgrounds/education-bg.png" alt="bg-image">
   <div class="container">
     <div class="has-text-centered">
@@ -175,18 +168,29 @@
     </div>
   </div>
 </section>
-<!-- /qualifications -->
+-->
 
 <!-- classes -->
 <section id="classes" class="section">
   <div class="container">
     <div class="has-text-centered">
       <h2 class="section-title">Classes</h2>
-      <!--<p class="subtitle">Explore our creative projects and the services we offer</p>-->
+    </div>
+
+    <!-- Card container for JS-injected classes -->
+    <div id="classes-debug" class="card-container"></div>
+  </div>
+</section>
+<!-- /classes -->
+
+<!--
+<section id="classes" class="section">
+  <div class="container">
+    <div class="has-text-centered">
+      <h2 class="section-title">Classes</h2>
     </div>
     <div class="columns is-multiline shuffle-wrapper">
       
-      <!-- Card 1 -->
       <div class="column is-4-desktop is-6-tablet mb-20 shuffle-item">
         <div class="is-relative hover-wrapper card shadow">
           <img src="images/portfolio/item-1.png" alt="portfolio-image" class="image is-full">
@@ -199,7 +203,6 @@
         </div>
       </div>
 
-      <!-- Card 2 -->
       <div class="column is-4-desktop is-6-tablet mb-20 shuffle-item">
         <div class="is-relative hover-wrapper card shadow">
           <img src="images/portfolio/item-2.png" alt="portfolio-image" class="image is-full">
@@ -212,7 +215,6 @@
         </div>
       </div>
 
-      <!-- Card 3 -->
       <div class="column is-4-desktop is-6-tablet mb-20 shuffle-item">
         <div class="is-relative hover-wrapper card shadow">
           <img src="images/portfolio/item-3.png" alt="portfolio-image" class="image is-full">
@@ -225,7 +227,6 @@
         </div>
       </div>
 
-      <!-- Card 4 -->
       <div class="column is-4-desktop is-6-tablet mb-20 shuffle-item">
         <div class="is-relative hover-wrapper card shadow">
           <img src="images/portfolio/item-4.png" alt="portfolio-image" class="image is-full">
@@ -238,7 +239,6 @@
         </div>
       </div>
 
-      <!-- Card 5 -->
       <div class="column is-4-desktop is-6-tablet mb-20 shuffle-item">
         <div class="is-relative hover-wrapper card shadow">
           <img src="images/portfolio/item-5.png" alt="portfolio-image" class="image is-full">
@@ -254,7 +254,7 @@
     </div>
   </div>
 </section>
-<!-- /classes -->
+-->
 
 <!-- schedule -->
 <section id="schedule" class="section">
@@ -295,46 +295,9 @@
       <h2 class="section-title has-text-white">Reviews</h2>
     </div>
     <div class="columns is-centered">
-      <div class="column is-10 testimonial-slider">
-        <!-- slider-item -->
-        <div class="has-text-centered testimonial-content">
-          <i class="ti-quote-right has-text-white icon mb-20 is-inline-block"></i>
-          <p class="has-text-white mb-20">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
-            incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, <strong>quis nostrud exercitation
-              ullamco laboris nisi ut aliquip ex ea commodo consequat.</strong> Duis aute irure dolor in reprehenderit
-            in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
-          <img class="image is-rounded is-inline-block mb-20" src="images/testimonial/client-1.png"
-            alt="client-image">
-          <h4 class="has-text-white">Jesica Gomez</h4>
-          <h6 class="has-text-light mb-20">CEO, Funder</h6>
-        </div>
-        <!-- slider-item -->
-        <div class="has-text-centered testimonial-content">
-          <i class="ti-quote-right has-text-white icon mb-4 d-inline-block"></i>
-          <p class="has-text-white mb-4">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
-            incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, <strong>quis nostrud exercitation
-              ullamco
-              laboris nisi ut aliquip ex ea commodo consequat.</strong> Duis aute irure dolor in reprehenderit in
-            voluptate velit
-            esse cillum dolore eu fugiat nulla pariatur.</p>
-          <img class="image is-rounded is-block" src="images/testimonial/client-1.png"
-            alt="client-image">
-          <h4 class="has-text-white">Jesica Gomez</h4>
-          <h6 class="has-text-light mb-4">CEO, Funder</h6>
-        </div>
-        <!-- slider-item -->
-        <div class="has-text-centered testimonial-content">
-          <i class="ti-quote-right has-text-white icon mb-4 d-inline-block"></i>
-          <p class="has-text-white mb-4">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
-            incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, <strong>quis nostrud exercitation
-              ullamco
-              laboris nisi ut aliquip ex ea commodo consequat.</strong> Duis aute irure dolor in reprehenderit in
-            voluptate velit
-            esse cillum dolore eu fugiat nulla pariatur.</p>
-          <img class="image is-rounded is-block" src="images/testimonial/client-1.png"
-            alt="client-image">
-          <h4 class="has-text-white">Jesica Gomez</h4>
-          <h6 class="has-text-light mb-4">CEO, Funder</h6>
+      <div class="column is-10">
+        <div id="testimonial-slider" class="testimonial-slider">
+          <!-- Reviews will be injected here via JS -->
         </div>
       </div>
     </div>
@@ -347,14 +310,14 @@
   <img src="images/illustrations/leaf-pink-round.png" alt="bg-shape" class="image bg-shape-4">
   <img src="images/illustrations/leaf-cyan.png" alt="bg-shape" class="image bg-shape-5">
 </section>
-<!-- /testimonial -->
+<!-- /reviews -->
 
 
 <!-- contact -->
 <section id="contact" class="section section-on-footer" data-background="images/backgrounds/bg-dots.png">
   <div class="container">
     <div class="has-text-centered">
-      <h2 class="section-title">Contact Info</h2>
+      <h2 class="section-title">Contact Us</h2>
     </div>
     <div class="columns is-centered">
       <div class="column is-8-desktop">
@@ -386,14 +349,24 @@
 <footer class="has-background-dark footer-section">
   <div class="section">
     <div class="container">
-      <div class="columns">
+      <div class="columns is-centered has-text-centered">
         <div class="column is-4-tablet">
           <h5 class="has-text-light">Email</h5>
-          <p class="has-text-white paragraph-lg font-secondary">codingcrusaders@gmail.com</p>
+          <p class="paragraph-lg font-secondary">
+            <a href="mailto:codingcrusaderssg@gmail.com" class="has-text-white">codingcrusaderssg@gmail.com</a>
+          </p>
         </div>
         <div class="column is-4-tablet">
-          <h5 class="has-text-light">Phone</h5>
-          <p class="has-text-white paragraph-lg font-secondary">+65 89524032</p>
+          <h5 class="has-text-light">Instagram</h5>
+          <p class="paragraph-lg font-secondary">
+            <a href="https://www.instagram.com/codingcrusaders" target="_blank" class="has-text-white">@codingcrusaders</a>
+          </p>
+        </div>
+        <div class="column is-4-tablet">
+          <h5 class="has-text-light">WhatsApp</h5>
+          <p class="paragraph-lg font-secondary">
+            <a href="https://wa.me/6589524032" target="_blank" class="has-text-white">+65 89524032</a>
+          </p>
         </div>
       </div>
     </div>
